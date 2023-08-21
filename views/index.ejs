@@ -10,12 +10,10 @@
 
 <body>
 <div class="container">
-<h2>
-     Book Your Washing </h2> <h3><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date()) %> </h3>
-
+<h2 style="font-family: 'Courier New'">
+    Laundry Services </h2> 
 <form action ="/addtask" method="POST">
-    
-        <select class="selectpicker" data-style="btn-info" name="selectpicker">
+    <select class="selectpicker" data-style="btn-info" name="selectpicker">
             <% var options = []; %>
             <% for(var i = 0; i <= 11; i++) { %>
                 <% if (i==0)   { %>
@@ -24,21 +22,21 @@
                     <option value='<%= i %>'><%= 'Room ' + i %></option>
                     <% } %>
             <% } %>
-        </select>       
+        </select><span style="color: brown; font-weight: bold; font-family:serif;">&nbsp;<%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date()) %> </span>
 
-        <input type="text" name="newtask" placeholder="add your name">
-        <button> Add Task </button>
+        <input type="text" name="newtask" placeholder="add your name" class="invisible">
+        <button class="invisible"> Add Task </button>
 
-        <h2> Added Task date </h2>
+        <h2 style="font-family: cursive;background-color: aquamarine;"> Book My Schedule </h2>
 
         <% for( var i = 0; i < task.length; i++){ %>
             <li><input type="checkbox" name="check" value="<%= task[i] %>" /> <%= task[i] %> </li>
         <% } %>
 
-        <button formaction="/bookedtask" type="submit" id="top"> Booked </button>
+        <button formaction="/bookedtask" type="submit" id="top" class="btn btn-primary"> Booked </button>
 </form>
 
-<h2> Booked Washing </h2>
+<h2 style="color: rgb(27, 77, 4);font-family: 'Courier New', Courier, monospace;font-weight: bold;;background-color: aquamarine;"> My Schedule </h2>
 
 <% for(var i = 0; i < errorMsg.length; i++){ %>
     <spam><%= errorMsg[i] %></spam>
