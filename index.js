@@ -9,9 +9,28 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 //placeholders for added task
-var task = ["buy socks", "practise with nodejs"];
+var task = [
+  "Time 05:00 to 06:00 AM"
+, "Time 06:00 to 07:00 AM"
+, "Time 07:00 to 08:00 AM"
+, "Time 08:00 to 09:00 AM"
+, "Time 09:00 to 10:00 AM"
+, "Time 10:00 to 11:00 AM"
+, "Time 11:00 to 12:00 AM"
+, "Time 12:00 to 13:00 AM"
+, "Time 13:00 to 14:00 AM"
+, "Time 14:00 to 15:00 AM"
+, "Time 15:00 to 16:00 AM"
+, "Time 16:00 to 17:00 AM"
+, "Time 17:00 to 18:00 AM"
+, "Time 18:00 to 19:00 AM"
+, "Time 19:00 to 20:00 AM"
+, "Time 20:00 to 20:00 AM"
+, "Time 21:00 to 22:00 AM"
+, "Time 22:00 to 23:00 AM"
+];
 //placeholders for removed task
-var complete = ["finish jquery"];
+var complete = ["Finish Task"];
 
 //post route for adding new task 
 app.post("/addtask", function(req, res) {
