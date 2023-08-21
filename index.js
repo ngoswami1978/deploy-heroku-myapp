@@ -32,7 +32,6 @@ var task = [
 //placeholders for removed task
 var complete = ["Finish Task"];
 var datetime = new Date();
-datetime = datetime.toISOString().slice(0,10);
 
 //post route for adding new task 
 app.post("/addtask", function(req, res) {
