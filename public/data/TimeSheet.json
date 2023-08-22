@@ -1,0 +1,58 @@
+{
+    "timesarraychedule": [
+      {        
+               "time": "05:00 AM  to 06:00 AM"
+      },
+      {       
+               "time": "06:00 AM  to 07:00 AM"
+      },
+      {       
+               "time": "07:00 AM  to 08:00 AM"
+      },
+      {
+               "time": "08:00 AM  to 09:00 AM"
+      },
+      {
+               "time": "09:00 AM  to 10:00 AM"
+      },
+      {
+               "time": "10:00 AM  to 11:00 AM"
+      },
+      {
+               "time": "11:00 AM  to 12:00 PM"
+      },
+      {
+               "time": "12:00 PM  to 13:00 PM"
+      },
+      {
+               "time": "13:00 PM  to 14:00 PM"
+      },
+      {
+               "time": "14:00 PM  to 15:00 PM"
+      },
+      {
+               "time": "15:00 PM  to 16:00 PM"
+      },
+      {
+               "time": "16:00 PM  to 17:00 PM"
+      },
+      {
+                "time": "17:00 PM  to 18:00 PM"
+      },
+      {
+                "time": "18:00 PM  to 19:00 PM"
+      },
+      {
+                "time": "19:00 PM  to 20:00 PM"
+      },
+      {
+                "time": "20:00 PM  to 21:00 PM"
+      },
+      {
+                "time": "21:00 PM  to 22:00 PM"
+      },
+      {
+                "time": "22:00 PM  to 23:00 PM"
+      }
+    ]
+  }

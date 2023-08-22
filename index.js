@@ -1,3 +1,4 @@
+
 //dependencies required for the app
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -34,6 +35,13 @@ var task = [
 , " 21:00 PM  to 22:00 PM"
 , " 22:00 PM  to 23:00 PM"
 ];
+
+const { readFileSync } = require("fs");
+const path = "public/data/TimeSheet.json";
+
+const jsonString = readFileSync(path);
+console.log(JSON.parse(jsonString));
+
 //placeholders for removed task
 var complete = [""];
 var errorMsg = [""];
