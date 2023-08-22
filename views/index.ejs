@@ -23,10 +23,9 @@
                     <% } %>
             <% } %>
     </select>
-    <button formaction="/selectPreviousdate" type="submit" id="top" class="btn btn-info" style="font-size: 05px;"> << </button>
-    <span id="dt_wash" name="dt_wash" class="datepicker"  style="color: brown; font-weight: bold; font-family:serif;">&nbsp;<%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date()) %> </span>
-    <span id="dt_wash1" name="dt_wash1" class="datepicker1"  style="color: brown; font-weight: bold; font-family:serif;">&nbsp;<%=dt_datePickerValue %> </span>    
-    <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info" style="font-size: 05px;"> >> </button>
+    <button formaction="/selectPreviousdate" type="submit" id="top" class="btn btn-info" style="font-size: 10px;"> << </button>
+    <span id="dt_wash" name="dt_wash" class="datepicker"  style="color: brown; font-weight: bold; font-family:serif;">&nbsp;<%=dt_datePickerValue %> </span>    
+    <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info" style="font-size: 10px;"> >> </button>
 
         <input type="text" name="newtask" placeholder="add your name" class="invisible">
         <button class="invisible"> Add Task </button>

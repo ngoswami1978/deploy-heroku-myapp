@@ -113,7 +113,7 @@ app.post("/selectNextdate", function(req, res) {
 
 app.post("/selectPreviousdate", function(req, res) {    
     dt_datePicker = subtractDays(1);
-    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});    
+    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});        
 });
 
 //render the ejs and display added task, completed task
