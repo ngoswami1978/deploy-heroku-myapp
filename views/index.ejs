@@ -5,13 +5,13 @@
     <title>Washing Your Cloth</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
-    <!-- <link href="/styles.css" rel="stylesheet"> -->
+    <link href="/styles.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="container">
 <h2 style="font-family: 'Courier New'">
-    Laundry Services </h2> 
+    <p></p></h2> 
 <form action ="/addtask" method="POST">
     <select class="selectpicker" data-style="btn-info" name="selectpicker">
             <% var options = []; %>
@@ -22,18 +22,22 @@
                     <option value='<%= i %>'><%= 'Room ' + i %></option>
                     <% } %>
             <% } %>
-        </select><span style="color: brown; font-weight: bold; font-family:serif;">&nbsp;<%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date()) %> </span>
+    </select>
+    <button formaction="/selectPreviousdate" type="submit" id="top" class="btn btn-info" style="font-size: 05px;"> << </button>
+    <span id="dt_wash" name="dt_wash" class="datepicker"  style="color: brown; font-weight: bold; font-family:serif;">&nbsp;<%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date()) %> </span>
+    <span id="dt_wash1" name="dt_wash1" class="datepicker1"  style="color: brown; font-weight: bold; font-family:serif;">&nbsp;<%=dt_datePickerValue %> </span>    
+    <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info" style="font-size: 05px;"> >> </button>
 
         <input type="text" name="newtask" placeholder="add your name" class="invisible">
         <button class="invisible"> Add Task </button>
 
-        <h2 style="font-family: cursive;background-color: aquamarine;"> Book My Schedule </h2>
+        <h2 style="font-family: cursive;background-color: aquamarine;font-size:x-large;"> Book My Schedule </h2>
 
         <% for( var i = 0; i < task.length; i++){ %>
             <li><input type="checkbox" name="check" value="<%= task[i] %>" /> <%= task[i] %> </li>
         <% } %>
 
-        <button formaction="/bookedtask" type="submit" id="top" class="btn btn-primary"> Booked </button>
+        <button formaction="/bookedtask" type="submit" id="top" class="btn btn-primary"> Click to Book </button>
 </form>
 
 <h2 style="color: rgb(27, 77, 4);font-family: 'Courier New', Courier, monospace;font-weight: bold;;background-color: aquamarine;"> My Schedule </h2>

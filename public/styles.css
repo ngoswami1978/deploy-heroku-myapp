@@ -4,14 +4,17 @@
 }
 
 body {
-    background: rgb(245, 245, 245);
-    color: #333333;
+    /* background: url("laundry-service-horizontal-banner.jpg");     */
     margin-top: 20px;
+    /* Add the blur effect */    
 }
 
+p{
+    background: url("images/laundry-service-horizontal-banner.jpg");   
+    height: 150px;
+}
 .container {
-    display: block;
-    width: 400px;
+    display: block;    
     margin: 0 auto;
 }
 

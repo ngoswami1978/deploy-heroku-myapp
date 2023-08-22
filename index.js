@@ -37,6 +37,7 @@ var task = [
 //placeholders for removed task
 var complete = [""];
 var errorMsg = [""];
+var dt_datePicker=Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date());
 complete.pop();
 errorMsg.pop();
 var datetime = new Date();
@@ -105,10 +106,30 @@ app.post("/bookedtask", function(req, res) {
     }
 });
 
+app.post("/selectNextdate", function(req, res) {    
+    dt_datePicker = addDays(1);
+    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});    
+});
+
+app.post("/selectPreviousdate", function(req, res) {    
+    dt_datePicker = subtractDays(1);
+    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});    
+});
+
 //render the ejs and display added task, completed task
 app.get("/", function(req, res) {    
-    res.render("index", { task: task, complete: complete , errorMsg:errorMsg });
+    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});
 });
+
+function addDays (days, date = new Date(dt_datePicker)) {      
+    date.setDate(date.getDate() + days)
+    return  Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(date);
+}
+function subtractDays (days, date = new Date(dt_datePicker)) {      
+    date.setDate(date.getDate() - days)
+    return  Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(date);
+}
+
 
 //set app to listen on port 3000
 app.listen(process.env.PORT || 3000, function(){
