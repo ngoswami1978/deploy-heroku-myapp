@@ -82,7 +82,7 @@ app.post("/bookedtask", function(req, res) {
         res.redirect("/");
     }    
     else{
-        while (arr.length > 0) {
+        while (errorMsg.length > 0) {
             errorMsg.pop();
           }    
         var completeTask = req.body.check;
