@@ -12,6 +12,7 @@ p{
     background: url("images/laundry-service-horizontal-banner.jpg");   
     height: 150px;        
     background-repeat: no-repeat;        
+    margin-bottom:-5rem;
 }
 .container {
     display: block;    
