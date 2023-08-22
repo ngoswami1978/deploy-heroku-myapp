@@ -78,6 +78,9 @@ app.post("/bookedtask", function(req, res) {
     var _room = req.body.selectpicker;
     console.log('Room Selected  - Room ', _room);
     if (_room==0) {
+        while (errorMsg.length > 0) {
+            errorMsg.pop();
+          }    
         errorMsg.push("Please Select Room Number");
         res.redirect("/");
     }    
