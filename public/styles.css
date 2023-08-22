@@ -5,13 +5,13 @@
 
 body {
     /* background: url("laundry-service-horizontal-banner.jpg");     */
-    margin-top: 20px;
-    /* Add the blur effect */    
+    margin-top: 10px;    
 }
 
 p{
     background: url("images/laundry-service-horizontal-banner.jpg");   
-    height: 150px;
+    height: 150px;        
+    background-repeat: no-repeat;        
 }
 .container {
     display: block;    
