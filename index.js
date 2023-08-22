@@ -82,21 +82,23 @@ app.post("/bookedtask", function(req, res) {
         res.redirect("/");
     }    
     else{
-    errorMsg.pop();
-    var completeTask = req.body.check;
-    //check for the "typeof" the different completed task, then add into the complete task
-    if (typeof completeTask === "string") {
-    var _room = req.body.selectpicker;        
-        complete.push(completeTask + "--> Room" + _room);
-        //check if the completed task already exits in the task when checked, then remove it
-        task.splice(task.indexOf(completeTask), 1);
-    } else if (typeof completeTask === "object") {        
-        for (var i = 0; i < completeTask.length; i++) {
-            complete.push(completeTask[i]+ "--> Room " + _room);
-            task.splice(task.indexOf(completeTask[i]), 1);
+        while (arr.length > 0) {
+            errorMsg.pop();
+          }    
+        var completeTask = req.body.check;
+        //check for the "typeof" the different completed task, then add into the complete task
+        if (typeof completeTask === "string") {
+        var _room = req.body.selectpicker;        
+            complete.push(completeTask + "--> Room" + _room);
+            //check if the completed task already exits in the task when checked, then remove it
+            task.splice(task.indexOf(completeTask), 1);
+        } else if (typeof completeTask === "object") {        
+            for (var i = 0; i < completeTask.length; i++) {
+                complete.push(completeTask[i]+ "--> Room " + _room);
+                task.splice(task.indexOf(completeTask[i]), 1);
+            }
         }
-    }
-    res.redirect("/");
+        res.redirect("/");
     }
 });
 
