@@ -3,8 +3,11 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 const { check, validationResult } = require('express-validator')
-var app = express();
+const fs = require("fs");
+const definetimesetupPath = "public/data/definetimesWashing.json";
+const logPath = "public/data/log.json";
 
+var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 //const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -36,11 +39,48 @@ var task = [
 , " 22:00 PM  to 23:00 PM"
 ];
 
-const { readFileSync } = require("fs");
-const path = "public/data/TimeSheet.json";
+let scheduletime_list='';
+fs.readFile(definetimesetupPath, "utf8", (err, jsonString) => {
+    if (err) {
+        console.log("Error reading the JSON file:", err);
+        return;
+    }
+    try {
+        scheduletime_list = JSON.parse(jsonString);
+        console.log(scheduletime_list);
+    } catch (err) {
+        console.log("Error parsing JSON string:", err);
+    }
+});
 
-const jsonString = readFileSync(path);
-console.log(JSON.parse(jsonString));
+let log_list='';
+fs.readFile(logPath, "utf8", (err, jsonString) => {
+    if (err) {
+        console.log("Error reading the JSON file:", err);
+        return;
+    }
+    try {
+        log_list = JSON.parse(jsonString);
+        console.log(log_list);
+    } catch (err) {
+        console.log("Error parsing JSON string:", err);
+    }
+});
+
+
+const customer = {
+    name: "Newbie Co.",
+    order_count: 0,
+    address: "Po Box City",
+}
+const jsonString = JSON.stringify(customer) 
+fs.writeFile('./newCustomer.json', jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('Successfully wrote file')
+    }
+})
 
 //placeholders for removed task
 var complete = [""];
@@ -115,11 +155,13 @@ app.post("/bookedtask", function(req, res) {
 });
 
 app.post("/selectNextdate", function(req, res) {    
+    console.log(scheduletime_list);
     dt_datePicker = addDays(1);
     res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});    
 });
 
 app.post("/selectPreviousdate", function(req, res) {    
+    console.log(scheduletime_list);
     dt_datePicker = subtractDays(1);
     res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});        
 });
