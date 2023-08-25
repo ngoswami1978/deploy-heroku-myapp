@@ -12,6 +12,9 @@
 <div class="container">
 <h2 style="font-family: 'Courier New'">
     <p></p></h2> 
+    <% for(var i = 0; i < errorMsg.length; i++){ %>
+        <spam class="error"><%= errorMsg[i] %></spam>
+    <% } %>
 <form action ="/addtask" method="POST">
     <select class="selectpicker" data-style="btn-info" name="selectpicker">
             <% var options = []; %>
@@ -36,14 +39,12 @@
             <li><input type="checkbox" name="check" value="<%= task[i] %>" /> <%= task[i] %> </li>
         <% } %>
 
-        <button formaction="/bookedtask" type="submit" id="top" class="btn btn-primary">Book Washing </button>
+        <button formaction="/bookedtask" type="submit" id="top" class="btn btn-primary" style="font-weight: bold;">Book My Wash </button>
 </form>
 
 <h2 style="color: rgb(27, 77, 4);font-family: 'Courier New', Courier, monospace;font-weight: bold;;background-color: aquamarine;"> My Schedule </h2>
 
-<% for(var i = 0; i < errorMsg.length; i++){ %>
-    <spam><%= errorMsg[i] %></spam>
-<% } %>
+
 
 <% for(var i = 0; i < complete.length; i++){ %>
     <li><input type="checkbox" checked><%= complete[i] %> </li>
