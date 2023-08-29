@@ -186,7 +186,8 @@ app.post("/selectPreviousdate", function(req, res) {
 });
 
 //render the ejs and display added task, completed task
-app.get("/", function(req, res) {    
+app.get("/", function(req, res) {   
+    dt_datePicker=Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date()); 
     res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});
 });
 
