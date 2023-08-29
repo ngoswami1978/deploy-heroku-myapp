@@ -4,7 +4,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 const { check, validationResult } = require('express-validator')
 const fs = require("fs");
-const definetimesetupPath = "public/data/definetimesWashing.json";
+const washingScheduledtimejson = "public/data/definetimesWashing.json";
 const logPath = "public/data/log.json";
 
 var app = express();
@@ -39,8 +39,19 @@ var task = [
 , " 22:00 PM  to 23:00 PM"
 ];
 
+const data_mywash = {
+    "date": "27-Aug-2023",
+    "room": "4",
+    "time": [
+        { "timeid": "3", "timeformat": "07:00 AM to 08:00 AM" },
+        { "timeid": "4", "timeformat": "08:00 AM to 09:00 AM" }
+    ]        
+  }      
+
+
+
 let scheduletime_list='';
-fs.readFile(definetimesetupPath, "utf8", (err, jsonString) => {
+fs.readFile(washingScheduledtimejson, "utf8", (err, jsonString) => {
     if (err) {
         console.log("Error reading the JSON file:", err);
         return;
@@ -53,34 +64,42 @@ fs.readFile(definetimesetupPath, "utf8", (err, jsonString) => {
     }
 });
 
-let log_list='';
-fs.readFile(logPath, "utf8", (err, jsonString) => {
-    if (err) {
-        console.log("Error reading the JSON file:", err);
-        return;
-    }
+let objwash = {
+    washing: []
+};
+
+fs.readFile(logPath, "utf8", function readFileCallback(err, data){
+    if (err){
+        console.log(err);
+    } else {
     try {
-        log_list = JSON.parse(jsonString);
-        console.log(log_list);
+        objwash  = JSON.parse(data);
+        objwash.washing.push(data_mywash);
+        var json = JSON.stringify(objwash); //convert it back to json
+
+        fs.writeFile(logPath,json, function(err){
+            if(err) return console.log(err);
+            console.log('washing schedule added');
+        });     
     } catch (err) {
         console.log("Error parsing JSON string:", err);
     }
-});
+}});
 
 
-const customer = {
-    name: "Newbie Co.",
-    order_count: 0,
-    address: "Po Box City",
-}
-const jsonString = JSON.stringify(customer) 
-fs.writeFile('./newCustomer.json', jsonString, err => {
-    if (err) {
-        console.log('Error writing file', err)
-    } else {
-        console.log('Successfully wrote file')
-    }
-})
+// const customer = {
+//     name: "Newbie Co.",
+//     order_count: 0,
+//     address: "Po Box City",
+// }
+// const jsonString = JSON.stringify(customer) 
+// fs.writeFile('./newCustomer.json', jsonString, err => {
+//     if (err) {
+//         console.log('Error writing file', err)
+//     } else {
+//         console.log('Successfully wrote file')
+//     }
+// })
 
 //placeholders for removed task
 var complete = [""];
@@ -122,7 +141,7 @@ app.post("/addtask", function(req, res) {
 //     }      
 // })
 
-app.post("/bookedtask", function(req, res) {
+app.post("/bookingtask", function(req, res) {
     const errors = validationResult(req)
     var _room = req.body.selectpicker;
     console.log('Room Selected  - Room ', _room);
@@ -179,7 +198,6 @@ function subtractDays (days, date = new Date(dt_datePicker)) {
     date.setDate(date.getDate() - days)
     return  Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(date);
 }
-
 
 //set app to listen on port 3000
 app.listen(process.env.PORT || 3000, function(){
