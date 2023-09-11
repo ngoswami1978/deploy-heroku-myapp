@@ -95,14 +95,16 @@
                             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                             <div class="card-body">
                                 <h5 class="card-title">Room No. <%= subscriptions.subscription[i].roomno %></h5>
-                                <p class="card-text"><br><%= subscriptions.subscription[i].datefrom %> <br> 
+                                <small class="card-text"><br><%= subscriptions.subscription[i].datefrom %> <br> 
                                     <% if (subscriptions.subscription[i].datefrom !='') { %>
-                                        Expire - <%= subscriptions.subscription[i].dateto %>
-                                    <% } else { %>
-                                       Not Subscribed     
-                                    <% } %> 
-                                    
-                                </p>
+                                       <span style="color: #b92b27;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: smaller;">
+                                        Expire-<%= subscriptions.subscription[i].dateto %></span>
+                                    <% } else { %>                                       
+                                       <p id = "blink_text">
+                                        Not Subscribed     
+                                        </p>
+                                    <% } %>                                     
+                                    </small>
 
                             </div>
                             <div class="card-footer">
