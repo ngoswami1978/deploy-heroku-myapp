@@ -8,7 +8,7 @@ body {
     margin-top: 10px;    
 }
 
-p{
+.plogo{
     background: url("images/laundry-service-horizontal-banner.jpg");   
     height: 150px;        
     background-repeat: no-repeat;        
@@ -57,3 +57,15 @@ ul {
     background-color: #FFCCBA;
     background-image: url('https://i.imgur.com/GnyDvKN.png');
 }
+
+/* Pattern styles */
+.left-half {
+    
+    float: left;
+    width: 50%;
+  }
+  .right-half {
+   
+    float: left;
+    width: 50%;
+  }

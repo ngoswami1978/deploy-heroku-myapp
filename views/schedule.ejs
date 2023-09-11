@@ -1,0 +1,72 @@
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wash Your Cloth @U-80/7 DLF PHASE-3</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+<h2 style="font-family: 'Courier New'">
+    <p></p></h2> 
+    <% for(var i = 0; i < errorMsg.length; i++){ %>
+        <spam class="error"><%= errorMsg[i] %></spam>
+    <% } %>
+    
+<form action ="/addtask" method="POST">
+    <select class="selectpicker" data-style="btn-info" name="selectpicker">
+            <% var options = []; %>
+            <% for(var i = 0; i <= 11; i++) { %>
+                <% if (i==0)   { %>
+                    <option value='<%= i %>'><%= 'Select Room' %></option>
+                    <% } else { %>             
+                    <option value='<%= i %>'><%= 'Room ' + i %></option>
+                    <% } %>
+            <% } %>
+    </select>
+    <button formaction="/selectPreviousdate" type="submit" id="top" class="btn btn-info" style="font-size: 5px;"> << </button>
+    <span id="dt_wash" name="dt_wash" class="datepicker"  style="color: rgb(52, 12, 233); font-family:serif;font-size: 11px;">&nbsp;<%=dt_datePickerValue %> </span>    
+    <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info" style="font-size: 5px;"> >> </button>
+
+        <input type="text" name="newtask" placeholder="add your name" class="invisible">
+        <button class="invisible"> Add Task </button>
+
+        <h2 style="font-family: cursive;background-color: aquamarine;font-size:x-large;"> Book My Schedule </h2>
+
+        <% for( var i = 0; i < task.length; i++){ %>
+            <li><input type="checkbox" name="check" value="<%= task[i] %>" /> <%= task[i] %> </li>
+        <% } %>
+
+        <button formaction="/bookingtask" type="submit" id="top" class="btn btn-primary" style="font-weight: bold;">Book My Wash </button>
+</form>
+
+<h2 style="color: rgb(27, 77, 4);font-family: 'Courier New', Courier, monospace;font-weight: bold;;background-color: aquamarine;"> My Schedule </h2>
+
+<% for(var i = 0; i < complete.length; i++){ %>
+    <li><input type="checkbox" checked><%= complete[i] %> </li>
+<% } %>
+</div>
+
+
+<section class="container">
+    <div class="left-half">
+      <article>
+        <h1>Left Half</h1>
+        
+      </article>
+    </div>
+    <div class="right-half">
+      <article>
+        <h1>Right Half</h1>
+        
+      </article>
+    </div>
+  </section>
+
+
+
+</body>
+</html>
