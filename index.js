@@ -149,7 +149,7 @@ app.post("/bookingtask", function(req, res) {
         while (errorMsg.length > 0) {
             errorMsg.pop();
           }    
-        errorMsg.push("Please select room");
+        errorMsg.push("select room");
         res.redirect("/");
     }    
     else{

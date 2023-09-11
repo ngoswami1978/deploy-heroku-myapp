@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wash Your Cloth @U-80/7 DLF PHASE-3</title>
-
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
     <link href="/styles.css" rel="stylesheet">
 </head>
@@ -45,16 +41,7 @@
                                                     </option>
                                                     <% } %>
                                                         <% } %>
-                                </select>
-                                <button formaction="/selectPreviousdate" type="submit" id="top" class="btn btn-info"
-                                    style="font-size: 5px;">
-                                    << </button>
-                                        <span id="dt_wash" name="dt_wash" class="datepicker"
-                                            style="color: rgb(52, 12, 233); font-family:serif;font-size: 11px;">&nbsp;
-                                            <%=dt_datePickerValue %> </span>
-                                        <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info"
-                                            style="font-size: 5px;"> >> </button>
-
+                                </select>                                    
                                         <input type="text" name="newtask" placeholder="add your name" class="invisible">
                                         <button class="invisible"> Add Task </button>
 
@@ -88,48 +75,67 @@
         </div>
         <div class="right-half">
             <article>
-                <br><br><br><br><br><br>
+                
+                <br><br><br>
+                <button formaction="/selectPreviousdate" type="submit" id="top" class="btn btn-info"
+                                    style="font-size: 5px;"><< </button>
+                                        <span id="dt_wash" name="dt_wash" class="datepicker"
+                                            style="color: rgb(52, 12, 233); font-family:serif;font-size: 11px;">&nbsp;
+                                            <%=dt_datePickerValue %>
+                                        </span>
+                                        <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info"
+                                            style="font-size: 5px;"> >> </button>
+
+                <br><br><br>
+                
                 <h2 style="font-family: cursive;background-color: rgba(235, 11, 11, 0.027);font-size:x-large;">
                     My Washing Plan Subscription
                 </h2>
                 <section style="background: linear-gradient(to right, #b92b27, #1565c0)">
 
                     <div class="card-deck">
-                      <div class="card bg-success text-white">
-                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                        <div class="card-body">
-                          <h5 class="card-title">Room No. 3</h5>
-                          <p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p>
+                        <div class="card bg-success text-white">
+                            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                            <div class="card-body">
+                                <h5 class="card-title">Room No. 3</h5>
+                                <p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="ext-success">3 days remaining to expire subscription. Contact to
+                                    Owner</small>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                          <small class="ext-success">3 days remaining to expire subscription. Contact to Owner</small>
+                        <div class="card bg-success text-white">
+                            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                            <div class="card-body">
+                                <h5 class="card-title">Room No. 9</h5>
+                                <p class="card-text">
+                                <p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="ext-success">3 days remaining to expire subscription. Contact to
+                                    Owner</small>
+                            </div>
                         </div>
-                      </div>
-                      <div class="card bg-success text-white">
-                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                        <div class="card-body">
-                          <h5 class="card-title">Room No. 9</h5>
-                          <p class="card-text"><p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p></p>
+                        <div class="card bg-success text-white">
+                            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                            <div class="card-body">
+                                <h5 class="card-title">Room No. 10</h5>
+                                <p class="card-text">
+                                <p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="ext-success">3 days remaining to expire subscription. Contact to
+                                    Owner</small>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                          <small class="ext-success">3 days remaining to expire subscription. Contact to Owner</small>
-                        </div>
-                      </div>
-                      <div class="card bg-success text-white">
-                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                        <div class="card-body">
-                          <h5 class="card-title">Room No. 10</h5>
-                          <p class="card-text"><p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p></p>
-                        </div>
-                        <div class="card-footer">
-                          <small class="ext-success">3 days remaining to expire subscription. Contact to Owner</small>
-                        </div>
-                      </div>
                     </div>
-                    </div>
-                  </section>
-            </article>
         </div>
+    </section>
+    </article>
+    </div>
     </section>
 
 
