@@ -75,58 +75,48 @@
         <div class="right-half">
             <article>
                 <button formaction="/selectPreviousdate" type="submit" id="top" class="btn btn-info"
-                                    style="font-size: 10px;">< </button>
-                                        <span id="dt_wash" name="dt_wash" class="datepicker"
-                                            style="color: rgb(52, 12, 233); font-family:serif;font-size: 11px;">&nbsp;
-                                            <%=dt_datePickerValue %>
-                                        </span>
-                                        <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info"
-                                            style="font-size:10px;"> > </button>
-                                
-                                            <h2
-                                            style="color: rgb(27, 77, 4);font-family: 'Courier New', Courier, monospace;font-weight: bold;font-size:small;;background-color: aquamarine;">
-                                            My subscription </h2>
+                                    style="font-size: 10px;width:1px;height: 1px;">
+                </button>
+                <span id="dt_wash" name="dt_wash" class="datepicker"
+                    style="color: rgb(52, 12, 233); font-family:serif;font-size: 10px;width:1px;height: 1px;">&nbsp;
+                    <%=dt_datePickerValue %>
+                </span>
+                <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info"
+                    style="font-size:10px;width:1px;height: 1px;">  </button>
+        
+                    <h2
+                    style="color: rgb(27, 77, 4);font-family: cursive;font-weight: bold;font-size:small;background-color: #28a745;">
+                    My subscription </h2>
 
                 <section style="background: linear-gradient(to right, #b92b27, #1565c0)">
-
                     <div class="card-deck">
+                        <% for(var i=0; i < subscriptions.subscription.length; i++){ %>
                         <div class="card bg-success text-white">
                             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                             <div class="card-body">
-                                <h5 class="card-title">Room No. 3</h5>
-                                <p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="ext-success">3 days remaining to expire subscription. Contact to
-                                    Owner</small>
-                            </div>
-                        </div>
-                        <div class="card bg-success text-white">
-                            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                            <div class="card-body">
-                                <h5 class="card-title">Room No. 9</h5>
-                                <p class="card-text">
-                                <p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p>
+                                <h5 class="card-title">Room No. <%= subscriptions.subscription[i].roomno %></h5>
+                                <p class="card-text"><br><%= subscriptions.subscription[i].datefrom %> <br> 
+                                    <% if (subscriptions.subscription[i].datefrom !='') { %>
+                                        Expire - <%= subscriptions.subscription[i].dateto %>
+                                    <% } else { %>
+                                       Not Subscribed     
+                                    <% } %> 
+                                    
                                 </p>
+
                             </div>
                             <div class="card-footer">
-                                <small class="ext-success">3 days remaining to expire subscription. Contact to
-                                    Owner</small>
+                                <small class="ext-success">
+                                    <% if (subscriptions.subscription[i].datefrom !='') { %>
+                                        <%= convertday(subscriptions.subscription[i].dateto)%>
+                                        days remaining to expire subscription. 
+                                    <% } else { %>
+                                       Please Subscribe to avail service
+                                    <% } %> 
+                                </small>
                             </div>
-                        </div>
-                        <div class="card bg-success text-white">
-                            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                            <div class="card-body">
-                                <h5 class="card-title">Room No. 10</h5>
-                                <p class="card-text">
-                                <p class="card-text"><br>10-Sep-2023 <br>End:10-Oct-2023</p>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="ext-success">3 days remaining to expire subscription. Contact to
-                                    Owner</small>
-                            </div>
-                        </div>
+                        </div>                        
+                        <% } %>
                     </div>
         </div>
     </section>

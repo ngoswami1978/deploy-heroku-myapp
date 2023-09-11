@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator')
 const fs = require("fs");
 const washingScheduledtimejson = "public/data/definetimesWashing.json";
 const logPath = "public/data/log.json";
+const roomSubscription ="public/data/roomSubscription.json";
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,6 +49,36 @@ const data_mywash = {
     ]        
   }      
 
+function convertday(todate) {
+    var now = new Date();
+    var secondDate = todate;
+    const date = new Date(now);
+    const date1 = new Date(secondDate);
+    timeDifference = Math.abs(date.getTime() - date1.getTime());
+    let differentDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
+    if (todate=='')
+    {
+        differentDays=0;
+    }
+
+
+    return differentDays;
+}
+
+
+let subscribed_list='';
+fs.readFile(roomSubscription, "utf8", (err, jsonString) => {
+    if (err) {
+        console.log("Error reading the JSON file:", err);
+        return;
+    }
+    try {
+        subscribed_list = JSON.parse(jsonString);
+        console.log(subscribed_list);
+    } catch (err) {
+        console.log("Error parsing JSON string:", err);
+    }
+});
 
 
 let scheduletime_list='';
@@ -176,19 +207,27 @@ app.post("/bookingtask", function(req, res) {
 app.post("/selectNextdate", function(req, res) {    
     console.log(scheduletime_list);
     dt_datePicker = addDays(1);
-    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});    
+    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker,subscriptions:subscribed_list});    
 });
 
 app.post("/selectPreviousdate", function(req, res) {    
     console.log(scheduletime_list);
     dt_datePicker = subtractDays(1);
-    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});        
+    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker,subscriptions:subscribed_list});        
 });
 
+
 //render the ejs and display added task, completed task
-app.get("/", function(req, res) {   
+app.get("/", function(req, res) {  
     dt_datePicker=Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date()); 
-    res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker});
+    res.render("index", { 
+        task: task
+        , complete: complete 
+        , errorMsg:errorMsg 
+        ,dt_datePickerValue: dt_datePicker
+        ,subscriptions:subscribed_list
+        ,convertday:convertday
+    });
 });
 
 function addDays (days, date = new Date(dt_datePicker)) {      

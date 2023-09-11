@@ -1,0 +1,59 @@
+{
+    "subscription": [
+      {    
+        "roomno":"1",
+            "datefrom": "",
+            "dateto": ""
+      },
+      {       
+        "roomno":"2",
+            "datefrom": "",
+            "dateto": ""
+      },
+      {       
+        "roomno":"3",
+            "datefrom": "10-Sep-2023",
+            "dateto": "10-Oct-2023"
+      },
+      {
+        "roomno":"4",
+            "datefrom": "",
+            "dateto": ""
+      },
+      {
+        "roomno":"5",
+            "datefrom": "",
+            "dateto": ""
+      },
+      {
+        "roomno":"6",
+            "datefrom": "",
+            "dateto": ""
+      },
+      {
+        "roomno":"7",
+            "datefrom": "",
+            "dateto": ""
+      },
+      {
+        "roomno":"8",
+            "datefrom": "",
+            "dateto": ""
+      },
+      {
+        "roomno":"9",
+            "datefrom": "12-Aug-2023",
+            "dateto": "12-Sep-2023"
+      },
+      {
+        "roomno":"10",
+            "datefrom": "09-Sep-2023",
+            "dateto": "09-Oct-2023"
+      },
+      {
+        "roomno":"11",
+            "datefrom": "",
+            "dateto": ""
+      }
+    ]
+  }
