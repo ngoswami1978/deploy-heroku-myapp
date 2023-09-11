@@ -45,12 +45,12 @@
                                         <input type="text" name="newtask" placeholder="add your name" class="invisible">
                                         <button class="invisible"> Add Task </button>
 
-                                        <h2
-                                            style="font-family: cursive;background-color: aquamarine;font-size:x-large;">
-                                            Book My Schedule </h2>
+                                        <h3
+                                            style="font-family: cursive;background-color: aquamarine;font-size:small;">
+                                            Book My Schedule </h3>
 
                                         <% for( var i=0; i < task.length; i++){ %>
-                                            <li><input type="checkbox" name="check" value="<%= task[i] %>" />
+                                            <li style="font-size:small;"><input type="checkbox" name="check" value="<%= task[i] %>" />
                                                 <%= task[i] %>
                                             </li>
                                             <% } %>
@@ -61,7 +61,7 @@
                             </form>
 
                             <h2
-                                style="color: rgb(27, 77, 4);font-family: 'Courier New', Courier, monospace;font-weight: bold;;background-color: aquamarine;">
+                                style="color: rgb(27, 77, 4);font-family: 'Courier New', Courier, monospace;font-weight: bold;font-size:small;;background-color: aquamarine;">
                                 My Schedule </h2>
 
                             <% for(var i=0; i < complete.length; i++){ %>
@@ -78,13 +78,13 @@
                 
                 <br><br><br>
                 <button formaction="/selectPreviousdate" type="submit" id="top" class="btn btn-info"
-                                    style="font-size: 5px;"><< </button>
+                                    style="font-size: 10px;">Previous date </button>
                                         <span id="dt_wash" name="dt_wash" class="datepicker"
                                             style="color: rgb(52, 12, 233); font-family:serif;font-size: 11px;">&nbsp;
                                             <%=dt_datePickerValue %>
                                         </span>
                                         <button formaction="/selectNextdate" type="submit" id="top" class="btn btn-info"
-                                            style="font-size: 5px;"> >> </button>
+                                            style="font-size:10px;"> Next date </button>
 
                 <br><br><br>
                 
