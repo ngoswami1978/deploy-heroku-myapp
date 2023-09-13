@@ -54,17 +54,17 @@ function convertday(todate) {
     var secondDate = todate;
     const date = new Date(now);
     const date1 = new Date(secondDate);
-    timeDifference = Math.abs(date.getTime() - date1.getTime());
-    let differentDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
+    let differentDays =0;
+    if (date1>date){
+        timeDifference = Math.abs(date.getTime() - date1.getTime());
+        differentDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
+    }    
     if (todate=='')
     {
         differentDays=0;
     }
-
-
     return differentDays;
 }
-
 
 let subscribed_list='';
 fs.readFile(roomSubscription, "utf8", (err, jsonString) => {
