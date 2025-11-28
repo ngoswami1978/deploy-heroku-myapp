@@ -4,9 +4,14 @@ var express = require("express");
 var bodyParser = require("body-parser");
 const { check, validationResult } = require('express-validator')
 const fs = require("fs");
+const axios = require("axios");
+const cron = require("node-cron");
+
 const washingScheduledtimejson = "public/data/definetimesWashing.json";
 const logPath = "public/data/log.json";
 const roomSubscription ="public/data/roomSubscription.json";
+const seatbookjson ="public/data/seat.json";
+const url = "https://server.vizmo.in/vms/classes/DeskBooking";
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -69,14 +74,14 @@ function convertday(todate) {
 let subscribed_list='';
 fs.readFile(roomSubscription, "utf8", (err, jsonString) => {
     if (err) {
-        console.log("Error reading the JSON file:", err);
+        console.log("Error reading the JSON file 1:", err);
         return;
     }
     try {
         subscribed_list = JSON.parse(jsonString);
-        console.log(subscribed_list);
+        //console.log(subscribed_list);
     } catch (err) {
-        console.log("Error parsing JSON string:", err);
+        console.log("Error parsing JSON string 2:", err);
     }
 });
 
@@ -84,16 +89,60 @@ fs.readFile(roomSubscription, "utf8", (err, jsonString) => {
 let scheduletime_list='';
 fs.readFile(washingScheduledtimejson, "utf8", (err, jsonString) => {
     if (err) {
-        console.log("Error reading the JSON file:", err);
+        console.log("Error reading the JSON file 3:", err);
         return;
     }
     try {
         scheduletime_list = JSON.parse(jsonString);
-        console.log(scheduletime_list);
+        //console.log(scheduletime_list);
     } catch (err) {
-        console.log("Error parsing JSON string:", err);
+        console.log("Error parsing JSON string 4:", err);
     }
 });
+
+
+// let seatbook_list='';
+// fs.readFile(seatbookjson,"utf8", async (err, jsonString) => {
+//     if (err) {
+//         console.log("Error reading the JSON file seat book:", err);
+//         return;
+//     }
+//     try {
+//         seatbook_list = JSON.parse(jsonString);
+//         console.log(seatbook_list);
+        
+//         for (let i = 0; i < seatbook_list.length; i++) {
+//             const booking = seatbook_list[i];
+//             console.log( booking);
+
+//             try {
+//                 const response = await axios.post(url, booking, {
+//                 headers: {
+//                     "X-Parse-Application-Id": booking._ApplicationId,
+//                     "X-Parse-JavaScript-Key": booking._JavaScriptKey,
+//                     "X-Parse-Session-Token": booking._SessionToken,
+//                     "Content-Type": "application/json",
+//                     },
+//                 });
+
+//                 console.log(`✔ Booking ${i + 1} sent successfully:`);
+//                 console.log(response.data);
+//                 console.log("-----------------------------------");
+
+//             } catch (apiError) {
+//             console.error(`❌ Failed to send record ${i + 1}`);
+//             console.error(apiError.response?.data || apiError.message);
+//             }
+
+
+//         }
+        
+        
+//     } catch (err) {
+//         console.log("Error parsing JSON string seat book:", err);
+//     }
+// });
+
 
 let objwash = {
     washing: []
@@ -104,16 +153,16 @@ fs.readFile(logPath, "utf8", function readFileCallback(err, data){
         console.log(err);
     } else {
     try {
-        objwash  = JSON.parse(data);
+       // objwash  = JSON.parse(data);
         objwash.washing.push(data_mywash);
         var json = JSON.stringify(objwash); //convert it back to json
 
         fs.writeFile(logPath,json, function(err){
             if(err) return console.log(err);
-            console.log('washing schedule added');
+            //console.log('washing schedule added');
         });     
     } catch (err) {
-        console.log("Error parsing JSON string:", err);
+        console.log("Error parsing JSON string 5:", err);
     }
 }});
 
@@ -175,7 +224,7 @@ app.post("/addtask", function(req, res) {
 app.post("/bookingtask", function(req, res) {
     const errors = validationResult(req)
     var _room = req.body.selectpicker;
-    console.log('Room Selected  - Room ', _room);
+    //console.log('Room Selected  - Room ', _room);
     if (_room==0) {
         while (errorMsg.length > 0) {
             errorMsg.pop();
@@ -205,17 +254,16 @@ app.post("/bookingtask", function(req, res) {
 });
 
 app.post("/selectNextdate", function(req, res) {    
-    console.log(scheduletime_list);
+    //console.log(scheduletime_list);
     dt_datePicker = addDays(1);
     res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker,subscriptions:subscribed_list});    
 });
 
 app.post("/selectPreviousdate", function(req, res) {    
-    console.log(scheduletime_list);
+    //console.log(scheduletime_list);
     dt_datePicker = subtractDays(1);
     res.render("index", { task: task, complete: complete , errorMsg:errorMsg ,dt_datePickerValue: dt_datePicker,subscriptions:subscribed_list});        
 });
-
 
 //render the ejs and display added task, completed task
 app.get("/", function(req, res) {  
@@ -238,6 +286,58 @@ function subtractDays (days, date = new Date(dt_datePicker)) {
     date.setDate(date.getDate() - days)
     return  Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(date);
 }
+
+
+
+async function sendBookings() {
+    try {
+        const jsonString = fs.readFileSync(seatbookjson, "utf8");
+        const seatbook_list = JSON.parse(jsonString);
+
+        for (let i = 0; i < seatbook_list.length; i++) {
+            const booking = seatbook_list[i];
+            console.log(`📌 Sending booking ${i + 1} for ${booking.assignedTo.name}`);
+
+            try {
+                const response = await axios.post(url, booking, {
+                    headers: {
+                        "X-Parse-Application-Id": booking._ApplicationId,
+                        "X-Parse-JavaScript-Key": booking._JavaScriptKey,
+                        "X-Parse-Session-Token": booking._SessionToken,
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                console.log(`✔ Success:`, response.data);
+            } catch (error) {
+                console.log(`❌ Failed (${booking.assignedTo.name}):`);
+                console.log(error.response?.data || error.message);
+            }
+
+            console.log("----------------------------------------");
+        }
+
+    } catch (err) {
+        console.error("❌ Error reading or parsing file:", err);
+    }
+}
+
+// 🔹 SCHEDULE FOR MIDNIGHT: `0 1 0 * * *` → 12:01 AM every day
+// cron.schedule("0 1 0 * * *", () => {
+//     console.log("⏰ Running scheduled task at: ", new Date().toLocaleString());
+//     sendBookings();
+// });
+
+// 🔹 SCHEDULE FOR EVER MINUTE 
+cron.schedule("* * * * *", () => {
+    console.log("⏰ Running every 1 minute:", new Date().toLocaleString());
+    sendBookings();
+});
+
+
+// 🔧 Test run immediately once (optional)
+//sendBookings();
+
 
 //set app to listen on port 3000
 app.listen(process.env.PORT || 3000, function(){
